@@ -1,0 +1,19 @@
+const socket = io('http://localhost:9000');
+
+socket.on('nsList', (nsData) => {
+  console.log('The list of namesapces has arrived!!!');
+
+  let namesapcesDiv = document.querySelector('.namespaces');
+  namesapcesDiv.innerHTML = '';
+  nsData.forEach((ns) => {
+    namesapcesDiv.innerHTML += `<div class="namespace" ns=${ns.endpoint}><img src="${ns.img}" /></div>`;
+  });
+
+  Array.from(document.getElementsByClassName('namespace')).forEach((elem) => {
+    elem.addEventListener('click', (e) => {
+      const nsEndpoint = elem.getAttribute('ns');
+      console.log(`${nsEndpoint} I should go to now`);
+    });
+  });
+  joinNS('/wiki');
+});
