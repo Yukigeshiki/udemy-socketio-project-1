@@ -1,5 +1,7 @@
 const socket = io('http://localhost:9000');
 
+let nsSocket = '';
+
 socket.on('nsList', (nsData) => {
   console.log('The list of namesapces has arrived!!!');
 
@@ -12,7 +14,7 @@ socket.on('nsList', (nsData) => {
   Array.from(document.getElementsByClassName('namespace')).forEach((elem) => {
     elem.addEventListener('click', (e) => {
       const nsEndpoint = elem.getAttribute('ns');
-      console.log(`${nsEndpoint} I should go to now`);
+      joinNS(nsEndpoint);
     });
   });
   joinNS('/wiki');
